@@ -1,0 +1,60 @@
+﻿var_name,def,model_1,model_2,model_3,model_4,model_5,model_6,model_7,model_8,model_9,model_10,model_11,model_12,model_13,model_14,model_15,model_16
+TASK SPECIFICATION,,,,,,,,,,,,,,,,,
+load_existing,"Is the model an existing model saved in model_dir with name model_f_name, or a raw model supported by fastai",0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1
+train,"Should the model specified be trained, if load_existing is true than the model is fine-tuned",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+predict,"Return predictions (either using a pretrained model, or following training)",1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1
+grad_cam,Should GradCam images be created using the model for rows indicated in grad_cam_col,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0
+GENERAL PARAMETERS,,,,,,,,,,,,,,,,,
+outcome,"Type of outcome variable, supported are: unilable, multilabel, continuous",unilabel,unilabel,multilabel,continuous,unilabel,unilabel,multilabel,continuous,unilabel,unilabel,multilabel,continuous,unilabel,unilabel,multilabel,continuous
+label_delim,Deliminator between lables in label_col in case of multiabel learning,None,None, ,None,None,None, ,None,None,None, ,None,None,None, ,None
+model_f_name,"String to name model, predictions and model arguments output",proj_resnet34_B,proj_squeezenet1_1_MC,proj_densenet121_ML,proj_vgg16_bn_C,proj_resnet34_B,proj_squeezenet1_1_MC,proj_densenet121_ML,proj_vgg16_bn_C,proj_densenet121_B,proj_resnet34_MC,proj_vgg16_bn_ML,proj_squeezenet1_1_C,proj_densenet121_B,proj_resnet34_MC,proj_vgg16_bn_ML,proj_squeezenet1_1_C
+device,PyTorch device to use,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+num_workers,number of CPUs to use,2,3,4,5,2,3,4,5,2,3,4,5,2,3,4,5
+model_dir,Directory to save models to,test_models,test_models,test_models,test_models,test_models,test_models,test_models,test_models,test_models,test_models,test_models,test_models,test_models,test_models,test_models,test_models
+DATABASE PARAMETERS,,,,,,,,,,,,,,,,,
+path,"ImageDataLoaders.from_csv, Learner: file path of working directory where database, MODELS folders reside",/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/,/mnt/md0/mkolossvary/CXR_ED/
+csv_fname,ImageDataLoaders.from_csv: file name of csv of database,test_database.csv,test_database.csv,test_database.csv,test_database.csv,test_database.csv,test_database.csv,test_database.csv,test_database.csv,test_database.csv,test_database.csv,test_database.csv,test_database.csv,test_database.csv,test_database.csv,test_database.csv,test_database.csv
+fn_col,ImageDataLoaders.from_csv: column name containing filenames with full paths,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full,PNG_name_full
+label_col,"ImageDataLoaders.from_csv: column name containing lables, if space is present, then they will be considerd mutliple lables",Outcome,Outcome_multiclass,Outcome_multilabel,Outcome_continuous,Outcome,Outcome_multiclass,Outcome_multilabel,Outcome_continuous,Outcome,Outcome_multiclass,Outcome_multilabel,Outcome_continuous,Outcome,Outcome_multiclass,Outcome_multilabel,Outcome_continuous
+valid_col,ImageDataLoaders.from_csv: column name containing boolean whether it row is for validation or not,Tuning,Tuning,Tuning,Tuning,Tuning,Tuning,Tuning,Tuning,Tuning,Tuning,Tuning,Tuning,Tuning,Tuning,Tuning,Tuning
+grad_cam_col,Column name containing boolean whether to create gradCAM images for given rows,GradCAM,GradCAM,GradCAM,GradCAM,GradCAM,GradCAM,GradCAM,GradCAM,GradCAM,GradCAM,GradCAM,GradCAM,GradCAM,GradCAM,GradCAM,GradCAM
+IMAGE RESIZING,,,,,,,,,,,,,,,,,
+size,"Pixel size to which the images should be resized in x y dimensions, must be at least 224","224, 224","300, 300","400, 300","600, 800","224, 224","300, 300","400, 300","600, 800","224, 224","300, 300","400, 300","600, 800","224, 224","300, 300","400, 300","600, 800"
+method,"Resize class method: squish, pad, crop",crop,crop,crop,crop,crop,crop,crop,crop,pad,squish,pad,squish,pad,squish,pad,squish
+pad_mode,"Resize class  and aug_transform pad_mode: zeros, border, reflection",zeros,zeros,zeros,zeros,zeros,zeros,zeros,zeros,border,border,reflection,reflection,border,border,reflection,reflection
+DATA AUGMENTATION,,,,,,,,,,,,,,,,,
+do_flip,aug_transforms: should horizontal flip be done,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,1
+flip_vert,aug_transforms: should verticle flip be done,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1
+max_rotate,aug_transforms: maximum rotation on image in degrees,30,60,30,90,30,60,30,90,30,60,30,0,30,60,30,0
+min_zoom,aug_transforms: zoom range minimum,1,0.7,1,0.9,1,0.7,1,0.9,1,0.7,1,0.9,1,0.7,1,0.9
+max_zoom,aug_transforms: zoom range maximum,1.4,2.5,1.4,3.5,1.4,2.5,1.4,3.5,1.4,2.5,1.4,3.5,1.4,2.5,1.4,3.5
+max_warp,aug_transforms: degree of warp,0,0.1,0.2,0.3,0,0.1,0.2,0.3,0,0.1,0.2,0.3,0,0.1,0.2,0.3
+p_affine,aug_transforms: prbability of affine (above) transformations,0.5,0.7,0,0.9,0.5,0.7,0,0.9,0.5,0.7,0,0.9,0.5,0.7,0,0.9
+max_lighting,aug_transforms: max change in lighting,0.1,0,0.1,0.7,0.1,0,0.1,0.7,0.1,0,0.1,0.7,0.1,0,0.1,0.7
+p_lighting,aug_transforms: prbability of lighting transoformation,0.2,0,0.2,1,0.2,0,0.2,1,0.2,0,0.2,1,0.2,0,0.2,1
+DL MODEL,,,,,,,,,,,,,,,,,
+arch,"String of model architexture that is used by Learner, can be fastai supported from: https://pytorch.org/vision/stable/models.html",resnet34,squeezenet1_1,densenet121,vgg16_bn,resnet34,squeezenet1_1,densenet121,vgg16_bn,densenet121,resnet34,vgg16_bn,squeezenet1_1,densenet121,resnet34,vgg16_bn,squeezenet1_1
+freeze_to,"To which parameter group to freeze the model: -1 head, conventional freeze(), 0 unfreeze all, other int",-1,0,-1,1,-1,0,-1,1,-1,0,-1,1,-1,0,-1,1
+cbs_1,"Callbacks, additional functionalities evaluated on each epoch, arguments are given here, if you wish to use arguments defined in this document then use att_dic['arg'] where arg is a valid var_name",,,,,,,,,,,,,,,,
+cbs_2,,,,,,,,,,,,,,,,,
+DL TRAINING,,,,,,,,,,,,,,,,,
+loss_func,"Learner: loss function, see Loss Functions, if None then infeered from outcome type",None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None
+opt_func,"Learner: optimalization function, see Optimizers",Adam,Adam,Adam,Adam,Adam,Adam,Adam,Adam,Adam,Adam,Adam,Adam,Adam,Adam,Adam,Adam
+moms,fit_one_cycle: momentums used,"0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95","0.95, 0.85, 0.95"
+suggest_funcs,"Learner.lr_find: which automatic learning rate finder should be used. Given epochs are run on each in the given order. Values: minimum, steep, valley, slide","minimum, valley, steep","minimum, valley","minimum, valley","minimum, valley","steep, minimum, valley","minimum, valley","minimum, valley","minimum, valley","steep, slide","minimum, steep, slide","steep, slide","steep, slide","steep, slide","minimum, steep, slide","steep, slide","steep, slide"
+lr_type,"Learning strategy, currently supported: ""discriminative"" using min and max of suggest_funcs, ""sequential"" running n_epoch on each suggest_funcs result in order they are provided",sequential,sequential,sequential,sequential,sequential,sequential,sequential,sequential,sequential,sequential,sequential,sequential,sequential,sequential,sequential,sequential
+bs,ImageDataLoaders.from_csv: batch size of training and validation,64,128,64,8,64,128,64,8,64,128,64,8,64,128,64,8
+n_epoch,Learner.fit: number of epochs,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3
+DL TEST,,,,,,,,,,,,,,,,,
+tta,Should test time autmentation be used,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0
+tta_n,Number of TTA for predictions,4,4,4,4,4,4,6,4,4,4,4,4,4,4,6,4
+tta_beta,Weights of augmented data,0.25,0.25,0.25,0.25,0.25,0.25,0.5,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.5,0.25
+use_max,Should max pediction be used or average,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0
+GradCAM,,,,,,,,,,,,,,,,,
+gradcam_dir,Folder to save heatmap superimposed images to,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM,test_GradCAM
+gradcam_outcome,"Which outcome to use to generate gradients, either ""truth"", in which case the true label is used per image, or an integer specifying the ID of the outcome among possible IDs",truth,1,0,truth,truth,0,0,truth,truth,truth,0,truth,truth,1,0,truth
+model_layer,Which layer of the model should be hooked if model is learn.model.eval(),[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1],[0][-1][-1]
+sum_func,"Summary function to use on last layer of tensors, currently supported are mean, median, max, mean_max",mean,mean,mean,mean,max,max,max,max,median,median,median,median,mean,mean,mean,mean
+heatmap,"Type of heatmap to use, currently supported are, activation, gradient, activation_x_gradient",activation,gradient,activation_x_gradient,activation,gradient,activation_x_gradient,activation,gradient,activation_x_gradient,activation,gradient,activation_x_gradient,activation,gradient,activation_x_gradient,activation
+cmap,Matplotlib color gradient to use,jet,rainbow,ocean,gnuplot,CMRmap,nipy_spectral,jet,rainbow,ocean,gnuplot,CMRmap,nipy_spectral,jet,rainbow,ocean,gnuplot
+alpha,Alpha level to use to superimpose color gradient,0.5,0.2,0.1,0.5,0.2,0.1,0.5,0.2,0.1,0.5,0.2,0.1,0.5,0.2,0.1,0.5
